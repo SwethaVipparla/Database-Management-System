@@ -2,86 +2,314 @@ import subprocess as sp
 import pymysql
 import pymysql.cursors
 
+def display(output):
+    '''
+    To display the sql outputs properly
+    '''
+    
+    if (len(output) == 0):
+        return
 
-def option2():
-    """
-    Function to implement option 1
-    """
-    print("Not implemented")
+    maxLengths = {}
+    header = output[0].keys();    
+    
+    for i, val in enumerate(header):
+        maxLengths[i] = len(str(val))
 
+    for row in output:
+        for i, val in enumerate(row.values()):
+            maxLengths[i] = max(maxLengths[i], len(str(val)))
 
-def option3():
-    """
-    Function to implement option 2
-    """
-    print("Not implemented")
+    print('_', end='')
+    for i in range(len(header)):
+        for _ in range(maxLengths[i] + 2):
+            print('_', end='')
+    print('_', end='')
 
+    print('\n|', end='')
 
-def option4():
-    """
-    Function to implement option 3
-    """
-    print("Not implemented")
+    for i, val in enumerate(header):
+        print(val, end='')
+        for _ in range(maxLengths[i] - len(str(val)) + 2):
+            print(' ', end='')
+        
+    print('|\n', end='')
 
+    print('‾', end='')
+    for i in range(len(header)):
+        for _ in range(maxLengths[i] + 2):
+            print('‾', end='')
+    print('‾')
 
-def hireAnEmployee():
-    """
-    This is a sample function implemented for the refrence.
-    This example is related to the Employee Database.
-    In addition to taking input, you are required to handle domain errors as well
-    For example: the SSN should be only 9 characters long
-    Sex should be only M or F
-    If you choose to take Super_SSN, you need to make sure the foreign key constraint is satisfied
-    HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
-    """
+    print('_', end='')
+
+    for i in range(len(header)):
+        for _ in range(maxLengths[i] + 2):
+            print('_', end='')
+
+    print('_')
+
+    for i, row in enumerate(output):
+        print('|', end='')
+        for i, val in enumerate(row.values()):
+            print(val, end='')
+            for _ in range(maxLengths[i] - len(str(val)) + 2):
+                print(' ', end='')
+        print('|\n', end='')
+
+    print('‾', end='')
+    for i in range(len(header)):
+        for _ in range(maxLengths[i] + 2):
+            print('‾', end='')
+    print('‾')
+
+        
+def executeQuery(query):
+    print(query, end='\n\n')
+
     try:
-        # Takes emplyee details as input
-        row = {}
-        print("Enter new employee's details: ")
-        name = (input("Name (Fname Minit Lname): ")).split(' ')
-        row["Fname"] = name[0]
-        row["Minit"] = name[1]
-        row["Lname"] = name[2]
-        row["Ssn"] = input("SSN: ")
-        row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
-        row["Address"] = input("Address: ")
-        row["Sex"] = input("Sex: ")
-        row["Salary"] = float(input("Salary: "))
-        row["Dno"] = int(input("Dno: "))
-
-        query = "INSERT INTO EMPLOYEE(Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Dno) VALUES('%s', '%c', '%s', '%s', '%s', '%s', '%c', %f, %d)" % (
-            row["Fname"], row["Minit"], row["Lname"], row["Ssn"], row["Bdate"], row["Address"], row["Sex"], row["Salary"], row["Dno"])
-
-        print(query)
         cur.execute(query)
         con.commit()
-
-        print("Inserted Into Database")
-
+        display(cur.fetchall())
     except Exception as e:
         con.rollback()
-        print("Failed to insert into database")
         print(">>>>>>>>>>>>>", e)
+
+
+def insert_a():
+
+    # Takes region details as input
+    id = input("Enter Region ID: ")
+    rname = input("Enter Region Name: ")
+    oname = input("Enter Organisation Name: ")
+    mgrid = input("Enter Region Manager ID: ") 
+
+    query = f"INSERT INTO Region VALUES ('{id}','{rname}','{oname}','{mgrid}');" 
+
+    if executeQuery(query) == 1: 
+        print("Inserted Into Database")
+    return
+
+
+def insert_b():
+
+    # Takes Money Front details as input
+    fname = input("Enter Front Name: ")
+    oname = input("Enter Organisation Name: ")
+    accid = input("Enter Accountant ID: ")
+    amount = float(input("Enter Amount Laundered: "))
+        
+    query = f"INSERT INTO Money_Front VALUES ('{fname}','{oname}','{accid}','amount');" 
+    
+    if executeQuery(query) == 1:
+         print("Inserted Into Database")
+    return
+
+
+def insert_c():
+    '''
+    `Employee_ID` varchar(50) NOT NULL pk,
+    `Organisation_Name` varchar(50) DEFAULT NULL,
+    `Employee_Type` varchar(50) DEFAULT NULL,
+    `Start_Date` date DEFAULT NULL,
+    `End_Date` date DEFAULT NULL,
+    `Region_ID` varchar(50) DEFAULT NULL,
+    `First_Name` varchar(50) DEFAULT NULL,
+    `Last_Name` varchar(50) DEFAULT NULL,
+    `DOB` date DEFAULT NULL,
+    `Salary` decimal(13,2) DEFAULT NULL,
+    '''
+    
+    # Takes Employee details as input
+    eid = input("Enter Employee ID: ")
+    oname = input("Enter Organisation Name: ")
+    empType = input("Enter Employee Type: ")
+    sDate = input("Enter Start Date(YYYY-MM-DD): ")
+    eDate = input("Enter End Date(YYYY-MM-DD): ")
+    rid = input("Enter Region ID: ")
+    fname = input("Enter First Name: ")
+    lname = input("Enter Last Name: ")
+    dob = input ("Enter Date of Birth(YYYY-MM-DD): ")
+    sal = float(input("Enter Salary: "))
+    
+    if eDate.upper() == 'NA':
+        eDate = "9999-12-31"
+        
+    # print(row["End_Date"])
+
+    query = f"INSERT INTO Employee VALUES ('{eid}','{oname}','{empType}','{sDate}','{eDate}','{rid}', '{fname}','{lname}','{dob}','{sal}');"
+
+    if executeQuery(query) == 1:
+        print("Inserted Into Database")
+    return
+
+
+def delete_a():
+
+    eid = input("Enter Employee ID you want to delete: ")
+
+    query = f"DELETE FROM Employee where Employee_ID = '{eid}';"
+
+    if executeQuery(query) == 1:
+        print("Deleted From Database")
+    return
+
+
+def delete_b():
+
+    fname = input("Enter Front Name you want to delete: ")
+    oname = input("Enter Organisation Name you want to delete: ")
+    accid = input("Enter Accountant ID you want to delete: ")
+
+    query = f"DELETE FROM Money_Front where Front_Name = '{fname}' AND Organisation_Name = '{oname}' AND Acc_Emp_ID = '{accid}';"
+
+    if executeQuery(query) == 1:
+        print("Deleted From Database")
+    return
+
+
+def update_a():
+
+    cid = input("Enter Customer ID: ")
+    amount = float(input("Enter Updated Amount: "))
+
+    query = f"UPDATE Customer SET Amount_Received = {amount} where Customer_ID = '{cid}'"
+
+    if executeQuery(query) == 1:
+        print("Updated Database")
 
     return
 
+def update_b():
+
+    pid = input("Enter Producer ID: ")
+    amount = float(input("Enter Updated Amount: "))
+
+    query = f"UPDATE Producer SET Total_Amount_Paid = {amount} where Producer_ID = '{pid}'"
+
+    if executeQuery(query) == 1:
+        print("Updated Database")
+
+    return
+
+def update_c():
+
+    name = input("Enter Organisation name: ")
+    value = float(input("Enter Updated Market Value: "))
+
+    query = f"UPDATE Organisation SET Market_Value = {value} where Organisation_Name = '{name}'"
+
+    if executeQuery(query) == 1:
+        print("Updated Database")
+
+    return
+
+
+def selection_a():
+    query = 'SELECT * FROM Drug WHERE Purity > 90;'
+    executeQuery(query)
+
+def selection_b():
+    query = 'SELECT Number_Of_Employees FROM Territory WHERE Territory_ID = "Accountant";'
+    executeQuery(query)
+
+def projection_a():
+    """
+    Function to implement option 4
+    """
+    query = 'SELECT Employee.First_Name, Employee.Last_Name FROM Employee INNER JOIN Money_Front ON Employee.Employee_ID = Money_Front.Acc_Emp_ID WHERE Money_Front.Amount_Laundered >= 4800;'
+    executeQuery(query)    
+
+def projection_b():
+    """
+    Function to implement option 4
+    """
+    territory = input("Enter Territory ID: ")
+    query = f'SELECT Number_of_Employees FROM Territory WHERE Territory_ID="{territory}";'
+    executeQuery(query)   
+
+def aggregate_a():
+    '''
+        we need to get the falcon ids and the number of packages bought
+        from this table
+    '''
+
+    date = input("Enter Date in the form yyyy-mm-dd: ")
+    query = f"""
+    SELECT Sum(Falc.Packages) as Packages, Falcon.Territory_ID as Territory
+    FROM 
+    (
+        SELECT SUM(Num_Pkg_bought) as Packages, Falc_Emp_ID
+        FROM Buys
+        WHERE Trans_Date = "{date}"
+        GROUP By Falc_Emp_ID
+    ) as Falc
+    INNER JOIN Falcon
+    WHERE Falcon.Employee_ID = Falc.Falc_Emp_ID
+    GROUP BY Falcon.Territory_ID;
+    """
+    executeQuery(query)
+
+def aggregate_b():
+    year = input("Enter Year: ");
+    query = f'SELECT Sum(Net_Revenue) - Sum(Net_Spending) AS Net_Profit FROM Organisation_Details WHERE Date >= "{year}-01-01" AND Date <= "{year}-12-31";'
+    executeQuery(query)
+
+def search_a():
+    numbers = input("Enter numbers to search for:")
+    query = f'SELECT Phone_Number FROM Producer_Phone_Num WHERE Phone_Number LIKE "%{numbers}%" UNION SELECT Phone_Number FROM Emp_Phone_Num WHERE Phone_Number LIKE "%{numbers}%" UNION SELECT Phone_Number FROM Cust_Phone_Num WHERE Phone_Number LIKE "%{numbers}%";'
+    executeQuery(query)
+
+def search_b():
+    starting_letter = input("Enter starting letter: ")
+    query = f'SELECT Drug_Name FROM Drug WHERE Drug_Name LIKE "{starting_letter}%"'
+    executeQuery(query)
 
 def dispatch(ch):
     """
     Function that maps helper functions to option entered
     """
 
-    if(ch == 1):
-        hireAnEmployee()
-    elif(ch == 2):
-        option2()
-    elif(ch == 3):
-        option3()
-    elif(ch == 4):
-        option4()
+    if ch == 1:
+        insert_a()
+    elif ch == 2:
+        insert_b()
+    elif ch == 3:
+        insert_c()
+    elif ch == 4:
+        selection_a()
+    elif ch == 5:
+        selection_b()
+    elif ch == 6:
+        projection_a()
+    elif ch == 7:
+        projection_b()
+    elif ch == 8:
+        insert_a()
+    elif ch == 9:
+        insert_b()
+    elif ch == 11:
+        insert_c()
+    elif ch == 12:
+        aggregate_a()
+    elif ch == 13:
+        aggregate_b()
+    elif ch == 14:
+        search_a()
+    elif ch == 15:
+        search_b()
+    elif ch == 16:
+        delete_a()
+    elif ch == 17:
+        delete_b()
+    elif ch == 18:
+        update_a()
+    elif ch == 19:
+        update_b()
+    elif ch == 20:
+        update_c()
     else:
         print("Error: Invalid Option")
-
 
 # Global
 while(1):
@@ -96,9 +324,9 @@ while(1):
         # Set host to the server's address if you don't want to use local SQL server 
         con = pymysql.connect(host='localhost',
                               port=30306,
-                              user="root",
-                              password="password",
-                              db='COMPANY',
+                              user=username,
+                              password=password,
+                              db='los_pollos_hermanos',
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
 
@@ -117,10 +345,11 @@ while(1):
                 print("2. Option 2")  # Fire an Employee
                 print("3. Option 3")  # Promote Employee
                 print("4. Option 4")  # Employee Statistics
-                print("5. Logout")
+                print("")
+                print("10. Logout")
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
-                if ch == 5:
+                if ch == 10:
                     exit()
                 else:
                     dispatch(ch)
