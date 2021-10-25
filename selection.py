@@ -1,9 +1,9 @@
-import MiniWorld 
+import MiniWorld
 
 def a():
     query = 'SELECT * FROM Drug WHERE Purity > 90;'
     MiniWorld.executeQuery(query)
 
 def b():
-    query = 'SELECT Number_Of_Employees FROM Territory WHERE Territory_ID = "Accountant";'
+    query = 'SELECT * FROM Employee WHERE Employee_Type = "Accountant";'
     MiniWorld.executeQuery(query)

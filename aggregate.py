@@ -4,7 +4,7 @@ def a():
     date = input("Enter Date in the form yyyy-mm-dd: ")
     query = f"""
     SELECT Sum(Falc.Packages) as Packages, Falcon.Territory_ID as Territory
-    FROM 
+    FROM
     (
         SELECT SUM(Num_Pkg_bought) as Packages, Falc_Emp_ID
         FROM Buys

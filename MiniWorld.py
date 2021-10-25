@@ -1,17 +1,16 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
-import aggregate, delete, insert, projection, search, selection, update
+import aggregate, delete, insert, projection, search, selection, update, analysis
 
 def display(output):
 
     if (len(output) == 0):
-        print("0")
         return
 
     maxLengths = {}
-    header = output[0].keys();    
-    
+    header = output[0].keys();
+
     for i, val in enumerate(header):
         maxLengths[i] = len(str(val))
 
@@ -31,7 +30,7 @@ def display(output):
         print(val, end='')
         for _ in range(maxLengths[i] - len(str(val)) + 2):
             print(' ', end='')
-        
+
     print('|')
     print('‾', end='')
 
@@ -62,7 +61,7 @@ def display(output):
             print('‾', end='')
     print('‾')
 
-        
+
 def executeQuery(query):
     print(query, end='\n\n')
 
@@ -70,7 +69,6 @@ def executeQuery(query):
         cur.execute(query)
         con.commit()
         display(cur.fetchall())
-        print("hellow")
         return 1
 
     except Exception as e:
@@ -117,20 +115,26 @@ def dispatch(ch):
         update.b()
     elif ch == 20:
         update.c()
+    elif ch == 21:
+        analysis.a()
+    elif ch == 22:
+        analysis.b()
+    elif ch == 23:
+        analysis.c()
     else:
         print("Error: Invalid Option")
 
 # Global
 while(1):
     tmp = sp.call('clear', shell=True)
-    
+
     # Can be skipped if you want to hardcode username and password
     username = input("Username: ")
     password = input("Password: ")
 
     try:
         # Set db name accordingly which have been create by you
-        # Set host to the server's address if you don't want to use local SQL server 
+        # Set host to the server's address if you don't want to use local SQL server
         con = pymysql.connect(host='localhost',
                               port=30306,
                               user=username,
