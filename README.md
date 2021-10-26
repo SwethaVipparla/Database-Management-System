@@ -1,88 +1,333 @@
-## Installation Instructions
+# Los Pollos Hermanos
+
+Los Pollos Hermanos is a drug syndicate, whose ingpin is a very smart and fastidious. He supervises all the operations going on daily in his organization so that he’s always informed of all the happenings in his trade.  
+The organization’s trade is spread across various regions of the country,which inturn consists of multiple territories. There are departments of employees who oversee each of these different operations.
+
+## Requirements
 
 ### MySQL
 
-Although you haven't strictly been told to explicitly use MySQL, it is highly recommended. To install and run MySQL on a Docker container, follow the [instructions we sent previously](https://rvk7895.notion.site/rvk7895/Instructions-to-install-MySQL-in-Docker-b91ff88693544d639abcd30844a2ff86).
+Install and run MySQL on a [Docker container](https://swamp-season-c38.notion.site/Instructions-to-install-MySQL-in-Docker-12817f073d624673b81b277dece2ffe0).
 
-### PyMySQL
+#### PyMySQL
 
-Again, although you weren't explicitly told to use PyMySQL it is recommended that you do. That being said, you CANNOT use Pandas or any other Python library for the project. PyMySQL is an interface for connection to the MySQL server from Python.
+PyMySQL is an interface for connection to the MySQL server from Python.
 
-To install PyMySQL, you can use one of the two routes  
+To install PyMySQL, you can follow either of the following two ways:
 
-### Pip
+* Pip
 
-``` bash
+```sh
 pip install PyMySQL
 ```
 
-### Conda
+* Conda
 
-``` bash
+```sh
 conda install -c anaconda pymysql
 ```
 
-## Boilerplate
+## Instructions to Run the Program
 
-We have provided a boilerplate piece of code just to get you started. The only reason this boiler plate is being shared is to show you what an acceptable UI looks like. You can decide to not use the boilerplate if you feel that you have already implemented a similar flow for your application.
+1. Clone the repository
 
-### To Run
+    ```sh
+    git clone https://github.com/SwethaVipparla/DnA-Project.git
+    ```
 
-To run the boilerplate code, you will need to login with your MySQL username and password (the boilerplate code has the username, password, and port hardcoded to work with the Docker installation instructions).
+2. Run the Docker container as per the document linked above. Load the database within the MySQL environment
 
-``` bash
-python3 boilerPlate.py
-```
+    ```sh
+    source ./dump.sql
+    ```
 
-This will prompt for you to enter your username and password.
+3. Run the program
 
-### UI Interface
+    ```sh
+    python3 MiniWorld.py 
+    ```
 
-Due to the timeline, you are not expected to implement a graphical UI (although you aren't disallowed either). A CLI (Command Line Interface) will suffice for the sake of the project.
+4. Enter the credentials of the user (same as the one used to create docker container)
+5. Once connected, enter the options listed in menu to execute the queries
 
-You can also have different interfaces depending on which kind of user logged in to your software.Taking here the example of the EMPLOYEE Database, under the assumption that someone from adminstration logged into, the UI will look something like this.
+## Functional Requirements
 
-```
-1. Hire a new employee
-2. Fire an employee
-3. Promote an employee
-4. Employee Statistics
-5. Logout
+Los Pollos Hermanos supports the following functional requirements:
 
-Enter Choice > 
-```
+### I. Modifications
 
-The boiler plate has a similar interface. Only one function has been implemented in the code provided. But it's enough to give you an idea about what you have to do.
+#### 1. Insert
 
-### Error Handling
+* Region entity  
+    Inserts a new entry in the table `Region`
 
-Although in this code, error handling hasn't explicitly been handled, you have to handle errors appropriately.  
+    ```sql
+    INSERT INTO Region 
+    VALUES 
+    (
+        '<Region_ID>',
+        '<Region_Name>',
+        '<Organisation_Name>',
+        '<Manager_ID>'
+    );
+    ```
 
-For example, if you try to delete a department, you can only do so after you've reassigned all the employess to another department. Or if you want to fire the manager of a department, you can only do so after assigning the department a new manager (where again, yes, the manager has to satisfy the foreign key constrain i.e. should be an employee himself)
+* Money Front entity  
+    Inserts a new entry in the table `Money_Front`
 
-Instead of handling all the errors yourself, you can make use of error messages which MySQL returns. [You might find this useful to implement when you want to debug as well](https://stackoverflow.com/questions/25026244/how-to-get-the-mysql-type-of-error-with-pymysql).
+    ```sql
+    INSERT INTO Money_Front
+    VALUES
+    (
+        '<Front_Name>',
+        '<Organisation_Name>',
+        '<Accountant_ID>',
+        '<Amount>'
+    );
+    ```
 
-``` python
-try:
-    do_stuff()
-except Exception as e:
-    print (e)
-```
+* Employee entity  
+    Inserts a new entry in the table `Employee`
 
-## Creating Dump File For MySQL
+    ```sql
+    INSERT INTO Employee 
+    VALUES 
+    (
+        '<Employee_ID>',
+        '<Organisation_Name>',
+        '<Employee_Type}',
+        '<Start_Date>',
+        '<End_Date>',
+        '<Region_ID>',
+        '<First_Name>',
+        '<Last_Name>',
+        '<Date_Of_Birth>',
+        '<Salary>'
+    );
+    ```
 
-If you plan to use MySQL. The database dump file can be created using
+#### 2. Delete
 
-``` bash
-mysqldump -u username -p databasename > filename.sql
-```
+* Employee entity  
+    Deletes an entry in the table `Employee` based on the `Employee_ID`
 
+    ```sql
+    DELETE FROM Employee 
+    WHERE Employee_ID = '<Employee_ID>';
+    ```
 
-## Resources
+* Money Front entity  
+    Deletes and entry in the table `Money_Front` based on (`Front_Name`,`Organisation_Name`,`Acc_Emp_ID`)
 
-* https://www.python.org/dev/peps/pep-0249/
-* https://dev.mysql.com/doc/connector-python/en/
-* http://zetcode.com/python/pymysql/
-* https://www.tutorialspoint.com/python3/python_database_access.htm
-* https://o7planning.org/en/11463/connecting-mysql-database-in-python-using-pymysql
-* https://www.journaldev.com/15539/python-mysql-example-tutorial
+    ```sql
+    DELETE FROM Money_Front 
+    WHERE 
+        Front_Name = '<Front_Name>' AND 
+        Organisation_Name = '<Organisation_Name>' AND 
+        Acc_Emp_ID = '<Account_ID>';
+    ```
+
+#### 3. Update
+
+* Customer Entity  
+    Updates the `Amount_Received` from customer in the table `Customer`
+
+    ```sql
+    UPDATE Customer 
+    SET Amount_Received = <New_Amount> 
+    WHERE Customer_ID = '<Customer_ID>'
+    ```
+
+* Producer Entity  
+    Updates the `Total_Amount_Paid` to producer in the table `Producer`
+
+    ```sql
+    UPDATE Producer 
+    SET Total_Amount_Paid = <New_Amount> 
+    WHERE Producer_ID = '<Producer_ID>'
+    ```
+
+* Organisation Entity  
+    Updates the `Market_Value` of the organisation in the table `Organisation`
+
+    ```sql
+    UPDATE Organisation
+    SET Market_Value = <New_Value>
+    WHERE Organisation_Name = '<Organisation_Name>'
+    ```
+
+### II. Retrievals
+
+#### 1. Selection
+
+* Show Drugs with purity > 90%
+  
+    ```sql
+    SELECT * 
+    FROM Drug 
+    WHERE Purity > 90;
+    ```
+
+* Show Accountant Details
+
+    ```sql
+    SELECT * 
+    FROM Employee 
+    WHERE Employee_Type = "Accountant";
+    ```
+
+#### 2. Projection
+
+* List all managers of who laundered amount greater than 4800
+  
+  ```sql
+    SELECT 
+        CONCAT(Employee.First_Name, " ", Employee.Last_Name) AS Name 
+    FROM Employee 
+    INNER JOIN Money_Front 
+    ON Employee.Employee_ID = Money_Front.Acc_Emp_ID 
+    WHERE Money_Front.Amount_Laundered >= 4800;
+  ```
+
+* Show Number of Employees in a Territory
+  
+  ```sql
+    SELECT Number_of_Employees 
+    FROM Territory 
+    WHERE Territory_ID = "<Territory>";
+  ```
+  
+#### 3. Aggregate
+
+* Show Total Amount of Packages sold in a day
+  
+  ```sql
+    SELECT 
+        Sum(Falc.Packages) as Packages, 
+        Falcon.Territory_ID as Territory
+    FROM
+    (
+        SELECT SUM(Num_Pkg_bought) as Packages, Falc_Emp_ID
+        FROM Buys
+        WHERE Trans_Date = "<Input_Date>"
+        GROUP By Falc_Emp_ID
+    ) as Falc
+    INNER JOIN Falcon
+    WHERE Falcon.Employee_ID = Falc.Falc_Emp_ID
+    GROUP BY Falcon.Territory_ID;
+    ```
+
+* Show Net profit acquired by end of the year
+
+    ```sql
+    SELECT 
+        Sum(Net_Revenue) - Sum(Net_Spending) AS Net_Profit 
+    FROM Organisation_Details 
+    WHERE 
+        Date >= "<Input_Year>-01-01" AND 
+        Date <= "<Input_Year>-12-31";
+    ```
+
+#### 4. Search
+
+* Search Phone Number of any Entity
+  
+    ```sql
+        SELECT Phone_Number, Producer_ID as ID 
+        FROM Producer_Phone_Num 
+        WHERE Phone_Number LIKE "%<Input_Numbers>%" 
+    UNION 
+        SELECT Phone_Number, Employee_ID as ID 
+        FROM Emp_Phone_Num 
+        WHERE Phone_Number LIKE "%<Input_Numbers>%" 
+    UNION 
+        SELECT Phone_Number, Customer_ID as ID 
+        FROM Cust_Phone_Num 
+        WHERE Phone_Number LIKE "%<Input_Numbers>%"
+  ```
+  
+* Search Name of Drug based on starting Letter
+
+    ```sql
+    SELECT Drug_Name 
+    FROM Drug 
+    WHERE Drug_Name LIKE "<Starting_Letter>%"
+    ```
+
+#### 4. Analysis
+
+* Average number of packages sold in a region after a particular date
+
+    ```sql
+    SELECT 
+        Region_ID, 
+        SUM(Packages) / DATEDIFF('<Today_Date>', '<Input_Date>') as Pac
+    FROM
+    (
+        SELECT 
+            SUM(Num_Pkg_bought) as Packages, 
+            Falc_Emp_ID as FID
+        FROM Buys
+        WHERE Trans_Date >= '<Input_Date>'
+        GROUP BY FID
+    ) as A
+    INNER JOIN
+    (
+        SELECT Employee_ID, Region_ID
+        FROM Employee
+        WHERE Employee_Type = 'Falcon'
+    ) as F
+    ON F.Employee_ID = A.FID
+    GROUP BY F.Region_ID;
+    ```
+
+* Profit a lieutenant generates in a week
+
+    ```sql
+    SELECT 
+        Ltnt_Emp_ID, 
+        Sum(amount) as Profit
+    FROM
+    (
+        SELECT 
+            FID, 
+            Packages * (Total_Pkg_buy - Total_Pkg_sell) as amount
+        FROM
+        (
+            SELECT 
+                Drug_ID as DID, 
+                sum(Num_Pkg_bought) as Packages, 
+                Falc_Emp_ID as FID
+            FROM Buys
+            WHERE 
+                Trans_Date >= '<Input_Date>' AND 
+                Trans_Date <= DATE_ADD('<Input_Date>', INTERVAL 7 DAY)
+            GROUP BY DID, Falc_Emp_ID
+        ) as F
+        INNER JOIN Drug
+        ON Drug_ID = DID
+    ) as A
+    INNER JOIN Falcon
+    ON Employee_ID = FID
+    GROUP BY Ltnt_Emp_ID;
+    ```
+
+* Change in number of buyers in a territory over the months
+
+    ```sql
+    SELECT
+        Region_ID,
+        COUNT(Customer_ID) as Customers,
+        EXTRACT(MONTH FROM Trans_Date) as M,
+        EXTRACT(YEAR FROM Trans_Date) as Y
+    FROM Buys
+    INNER JOIN
+    (
+        SELECT Employee_ID, Region_ID
+        FROM Employee
+        WHERE Employee_Type = 'Falcon'
+    ) as F
+    ON Falc_Emp_ID  = Employee_ID
+    GROUP BY Y, M, Region_ID
+    ORDER BY Region_ID, Y, M ASC;
+    ```
