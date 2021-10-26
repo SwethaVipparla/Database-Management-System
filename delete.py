@@ -8,7 +8,7 @@ def a():
     query = f"DELETE FROM Employee where Employee_ID = '{eid}';"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Deleted From Database")
+        print(f"{colours.bcolors.OKGREEN}Deleted From Database{colours.bcolors.ENDC}", end='\n\n')
     return
 
 
@@ -20,7 +20,7 @@ def b():
     query = f"DELETE FROM Money_Front where Front_Name = '{fname}' AND Organisation_Name = '{oname}' AND Acc_Emp_ID = '{accid}';"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Deleted From Database")
+        print(f"{colours.bcolors.OKGREEN}Deleted From Database{colours.bcolors.ENDC}", end='\n\n')
     return
 
 

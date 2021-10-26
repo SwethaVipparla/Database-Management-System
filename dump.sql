@@ -65,7 +65,7 @@ CREATE TABLE `Buys` (
   KEY `Buys_ibfk_3` (`Falc_Emp_ID`),
   CONSTRAINT `Buys_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `Customer` (`Customer_ID`) ON DELETE CASCADE,
   CONSTRAINT `Buys_ibfk_2` FOREIGN KEY (`Drug_ID`) REFERENCES `Drug` (`Drug_ID`) ON DELETE CASCADE,
-  CONSTRAINT `Buys_ibfk_3` FOREIGN KEY (`Falc_Emp_ID`) REFERENCES `Employee` (`Employee_ID`) ON DELETE CASCADE
+  CONSTRAINT `Buys_ibfk_3` FOREIGN KEY (`Falc_Emp_ID`) REFERENCES `Falcon` (`Employee_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,7 +148,7 @@ CREATE TABLE `Distribute` (
   KEY `Distribute_ibfk_3` (`Falc_Emp_ID`),
   CONSTRAINT `Distribute_ibfk_1` FOREIGN KEY (`Ltnt_Emp_ID`) REFERENCES `Lieutenant` (`Employee_ID`) ON DELETE CASCADE,
   CONSTRAINT `Distribute_ibfk_2` FOREIGN KEY (`Drug_ID`) REFERENCES `Drug` (`Drug_ID`) ON DELETE CASCADE,
-  CONSTRAINT `Distribute_ibfk_3` FOREIGN KEY (`Falc_Emp_ID`) REFERENCES `Employee` (`Employee_ID`) ON DELETE CASCADE
+  CONSTRAINT `Distribute_ibfk_3` FOREIGN KEY (`Falc_Emp_ID`) REFERENCES `Falcon` (`Employee_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -235,7 +235,8 @@ CREATE TABLE `Employee` (
   `Salary` decimal(13,2) DEFAULT NULL,
   PRIMARY KEY (`Employee_ID`),
   KEY `Employee_ibfk_1` (`Region_ID`),
-  CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`Region_ID`) REFERENCES `Region` (`Region_ID`) ON DELETE CASCADE
+  CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`Region_ID`) REFERENCES `Region` (`Region_ID`) ON DELETE CASCADE,
+  CONSTRAINT `Employee_ibfk_2` FOREIGN KEY (`Organisation_Name`) REFERENCES `Organisation` (`Organisation_Name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -245,7 +246,7 @@ CREATE TABLE `Employee` (
 
 LOCK TABLES `Employee` WRITE;
 /*!40000 ALTER TABLE `Employee` DISABLE KEYS */;
-INSERT INTO `Employee` VALUES ('ACC101','Medellin Cartel','Accountant','2011-07-29','9999-12-31','#A1','Ishant','Sharma','2000-01-01',25000.00),('ACC201','Medellin Cartel','Accountant','2010-07-29','9999-12-31','#A2','Umesh','Yadav','2000-02-02',25000.00),('ACC301','Medellin Cartel','Accountant','2009-07-29','9999-12-31','#A3','Navdeep','Saini','2000-03-03',25000.00),('FAL101','Medellin Cartel','Falcon','2011-07-29','9999-12-31','#A1','Mayank','Agarwal','2000-04-01',7000.00),('FAL102','Medellin Cartel','Falcon','2010-07-29','9999-12-31','#A1','Dinesh','Karthik','2001-04-02',7000.00),('FAL103','Medellin Cartel','Falcon','2011-08-29','9999-12-31','#A1','Kedar','Jadhav','2002-04-03',7000.00),('FAL201','Medellin Cartel','Falcon','2011-07-29','9999-12-31','#A2','Ravi','Ashwin','2000-02-01',7000.00),('FAL202','Medellin Cartel','Falcon','2010-07-29','9999-12-31','#A2','Hardik','Pandya','2001-02-02',7000.00),('FAL203','Medellin Cartel','Falcon','2011-08-29','9999-12-31','#A2','Krunal','Pandya','2002-02-03',7000.00),('FAL301','Medellin Cartel','Falcon','2011-07-29','9999-12-31','#A3','Shikhar','Dhawan','2000-03-01',7000.00),('FAL302','Medellin Cartel','Falcon','2010-07-29','9999-12-31','#A3','Cheteshwar','Pujara','2001-03-02',7000.00),('FAL303','Medellin Cartel','Falcon','2011-08-29','9999-12-31','#A3','Ajinkya','Rahane','2002-03-03',7000.00),('LIU101','Medellin Cartel','Lieutenant','2010-09-29','9999-12-31','#A1','Shardul','Thakur','2003-01-04',50000.00),('LIU201','Medellin Cartel','Lieutenant','2010-06-25','9999-12-31','#A2','Mohommad','Shami','2001-02-02',50000.00),('LIU301','Medellin Cartel','Lieutenant','2000-08-19','9999-12-31','#A3','Kuldeep','yadav','2000-03-11',50000.00),('RGM101','Medellin Cartel','Regional Manager','2010-07-29','9999-12-31','#A1','Evan','Tony','2003-04-04',52000.00),('RGM201','Medellin Cartel','Regional Manager','2012-06-25','9999-12-31','#A2','Naman','Sharma','2001-02-02',48000.00),('RGM301','Medellin Cartel','Regional Manager','2009-08-19','9999-12-31','#A3','Nevan','Dsouza','2000-11-11',60000.00),('SOL101','Medellin Cartel','Soldier','2011-07-29','9999-12-31','#A1','Khush','Patel','2002-04-04',5000.00),('SOL102','Medellin Cartel','Soldier','2010-07-29','9999-12-31','#A1','Dev','Shah','2003-04-04',5000.00),('SOL103','Medellin Cartel','Soldier','2011-08-29','9999-12-31','#A1','Yash','Mehan','2001-04-04',5000.00),('SOL104','Medellin Cartel','Soldier','2010-08-29','9999-12-31','#A1','Jaskaran','Singh','2000-04-04',5000.00),('SOL105','Medellin Cartel','Soldier','2011-09-29','9999-12-31','#A1','Rahul','Chahar','1999-04-04',5000.00),('SOL201','Medellin Cartel','Soldier','2011-07-29','9999-12-31','#A2','Virat','Kohli','2002-02-01',5000.00),('SOL202','Medellin Cartel','Soldier','2010-07-29','9999-12-31','#A2','Rohit','Sharma','2003-02-02',5000.00),('SOL203','Medellin Cartel','Soldier','2011-08-29','9999-12-31','#A2','Ravindra','Jadeja','2001-02-03',5000.00),('SOL204','Medellin Cartel','Soldier','2010-08-29','9999-12-31','#A2','Mahendra','Dhoni','2000-02-04',5000.00),('SOL205','Medellin Cartel','Soldier','2011-09-29','9999-12-31','#A2','Ravi','Shastri','1999-02-05',5000.00),('SOL301','Medellin Cartel','Soldier','2011-07-29','9999-12-31','#A3','Lokesh','Rahul','2002-03-01',5000.00),('SOL302','Medellin Cartel','Soldier','2010-07-29','9999-12-31','#A3','Yuzi','Chahal','2003-03-02',5000.00),('SOL303','Medellin Cartel','Soldier','2011-08-29','9999-12-31','#A3','Robin','Uthappa','2001-03-03',5000.00),('SOL304','Medellin Cartel','Soldier','2010-08-29','9999-12-31','#A3','Rishabh','Pant','2000-03-04',5000.00),('SOL305','Medellin Cartel','Soldier','2011-09-29','9999-12-31','#A3','Jasprit','Bumrah','1999-03-05',5000.00),('SUP101','Medellin Cartel','Supplier','2010-06-19','9999-12-31','#A1','Darsh','Parikh','2003-03-03',12000.00),('SUP102','Medellin Cartel','Supplier','2011-07-20','9999-12-31','#A1','Jayant','Reddy','2002-02-02',10000.00),('SUP201','Medellin Cartel','Supplier','2012-08-21','9999-12-31','#A2','Jainam','Gandhi','2001-01-01',8000.00),('SUP301','Medellin Cartel','Supplier','2009-09-09','9999-12-31','#A3','Nish','Patel','2000-10-10',18000.00);
+INSERT INTO `Employee` VALUES ('ACC101','Los Pollos Hermanos','Accountant','2011-07-29','9999-12-31','#A1','Ishant','Sharma','2000-01-01',25000.00),('ACC201','Los Pollos Hermanos','Accountant','2010-07-29','9999-12-31','#A2','Umesh','Yadav','2000-02-02',25000.00),('ACC301','Los Pollos Hermanos','Accountant','2009-07-29','9999-12-31','#A3','Navdeep','Saini','2000-03-03',25000.00),('FAL101','Los Pollos Hermanos','Falcon','2011-07-29','9999-12-31','#A1','Mayank','Agarwal','2000-04-01',7000.00),('FAL102','Los Pollos Hermanos','Falcon','2010-07-29','9999-12-31','#A1','Dinesh','Karthik','2001-04-02',7000.00),('FAL103','Los Pollos Hermanos','Falcon','2011-08-29','9999-12-31','#A1','Kedar','Jadhav','2002-04-03',7000.00),('FAL201','Los Pollos Hermanos','Falcon','2011-07-29','9999-12-31','#A2','Ravi','Ashwin','2000-02-01',7000.00),('FAL202','Los Pollos Hermanos','Falcon','2010-07-29','9999-12-31','#A2','Hardik','Pandya','2001-02-02',7000.00),('FAL203','Los Pollos Hermanos','Falcon','2011-08-29','9999-12-31','#A2','Krunal','Pandya','2002-02-03',7000.00),('FAL301','Los Pollos Hermanos','Falcon','2011-07-29','9999-12-31','#A3','Shikhar','Dhawan','2000-03-01',7000.00),('FAL302','Los Pollos Hermanos','Falcon','2010-07-29','9999-12-31','#A3','Cheteshwar','Pujara','2001-03-02',7000.00),('FAL303','Los Pollos Hermanos','Falcon','2011-08-29','9999-12-31','#A3','Ajinkya','Rahane','2002-03-03',7000.00),('LIU101','Los Pollos Hermanos','Lieutenant','2010-09-29','9999-12-31','#A1','Shardul','Thakur','2003-01-04',50000.00),('LIU201','Los Pollos Hermanos','Lieutenant','2010-06-25','9999-12-31','#A2','Mohommad','Shami','2001-02-02',50000.00),('LIU301','Los Pollos Hermanos','Lieutenant','2000-08-19','9999-12-31','#A3','Kuldeep','yadav','2000-03-11',50000.00),('RGM101','Los Pollos Hermanos','Regional Manager','2010-07-29','9999-12-31','#A1','Evan','Tony','2003-04-04',52000.00),('RGM201','Los Pollos Hermanos','Regional Manager','2012-06-25','9999-12-31','#A2','Naman','Sharma','2001-02-02',48000.00),('RGM301','Los Pollos Hermanos','Regional Manager','2009-08-19','9999-12-31','#A3','Nevan','Dsouza','2000-11-11',60000.00),('SOL101','Los Pollos Hermanos','Soldier','2011-07-29','9999-12-31','#A1','Khush','Patel','2002-04-04',5000.00),('SOL102','Los Pollos Hermanos','Soldier','2010-07-29','9999-12-31','#A1','Dev','Shah','2003-04-04',5000.00),('SOL103','Los Pollos Hermanos','Soldier','2011-08-29','9999-12-31','#A1','Yash','Mehan','2001-04-04',5000.00),('SOL104','Los Pollos Hermanos','Soldier','2010-08-29','9999-12-31','#A1','Jaskaran','Singh','2000-04-04',5000.00),('SOL105','Los Pollos Hermanos','Soldier','2011-09-29','9999-12-31','#A1','Rahul','Chahar','1999-04-04',5000.00),('SOL201','Los Pollos Hermanos','Soldier','2011-07-29','9999-12-31','#A2','Virat','Kohli','2002-02-01',5000.00),('SOL202','Los Pollos Hermanos','Soldier','2010-07-29','9999-12-31','#A2','Rohit','Sharma','2003-02-02',5000.00),('SOL203','Los Pollos Hermanos','Soldier','2011-08-29','9999-12-31','#A2','Ravindra','Jadeja','2001-02-03',5000.00),('SOL204','Los Pollos Hermanos','Soldier','2010-08-29','9999-12-31','#A2','Mahendra','Dhoni','2000-02-04',5000.00),('SOL205','Los Pollos Hermanos','Soldier','2011-09-29','9999-12-31','#A2','Ravi','Shastri','1999-02-05',5000.00),('SOL301','Los Pollos Hermanos','Soldier','2011-07-29','9999-12-31','#A3','Lokesh','Rahul','2002-03-01',5000.00),('SOL302','Los Pollos Hermanos','Soldier','2010-07-29','9999-12-31','#A3','Yuzi','Chahal','2003-03-02',5000.00),('SOL303','Los Pollos Hermanos','Soldier','2011-08-29','9999-12-31','#A3','Robin','Uthappa','2001-03-03',5000.00),('SOL304','Los Pollos Hermanos','Soldier','2010-08-29','9999-12-31','#A3','Rishabh','Pant','2000-03-04',5000.00),('SOL305','Los Pollos Hermanos','Soldier','2011-09-29','9999-12-31','#A3','Jasprit','Bumrah','1999-03-05',5000.00),('SUP101','Los Pollos Hermanos','Supplier','2010-06-19','9999-12-31','#A1','Darsh','Parikh','2003-03-03',12000.00),('SUP102','Los Pollos Hermanos','Supplier','2011-07-20','9999-12-31','#A1','Jayant','Reddy','2002-02-02',10000.00),('SUP201','Los Pollos Hermanos','Supplier','2012-08-21','9999-12-31','#A2','Jainam','Gandhi','2001-01-01',8000.00),('SUP301','Los Pollos Hermanos','Supplier','2009-09-09','9999-12-31','#A3','Nish','Patel','2000-10-10',18000.00);
 /*!40000 ALTER TABLE `Employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,7 +330,7 @@ CREATE TABLE `Money_Front` (
 
 LOCK TABLES `Money_Front` WRITE;
 /*!40000 ALTER TABLE `Money_Front` DISABLE KEYS */;
-INSERT INTO `Money_Front` VALUES ('ABC Consulatncy','Medellin Cartel','ACC101',5000.00),('LMN Lodgings','Medellin Cartel','ACC301',8750.00),('XYZ Real Estate','Medellin Cartel','ACC201',4500.00);
+INSERT INTO `Money_Front` VALUES ('ABC Consulatncy','Los Pollos Hermanos','ACC101',5000.00),('LMN Lodgings','Los Pollos Hermanos','ACC301',8750.00),('XYZ Real Estate','Los Pollos Hermanos','ACC201',4500.00);
 /*!40000 ALTER TABLE `Money_Front` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,7 +357,7 @@ CREATE TABLE `Organisation` (
 
 LOCK TABLES `Organisation` WRITE;
 /*!40000 ALTER TABLE `Organisation` DISABLE KEYS */;
-INSERT INTO `Organisation` VALUES ('Medellin Cartel',101,33456.00,'Swetha','Vipparla');
+INSERT INTO `Organisation` VALUES ('Los Pollos Hermanos',101,33456.00,'Swetha','Vipparla');
 /*!40000 ALTER TABLE `Organisation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,7 +453,10 @@ CREATE TABLE `Region` (
   `Region_Name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Organisation_Name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Region_MGR_ID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`Region_ID`)
+  PRIMARY KEY (`Region_ID`),
+  CONSTRAINT `Region_ibfk_1` FOREIGN KEY (`Organisation_Name`) REFERENCES `Organisation` (`Organisation_Name`) ON DELETE CASCADE,
+  CONSTRAINT `Region_ibfk_2` FOREIGN KEY (`Region_MGR_ID`) REFERENCES `Regional_Mgr` (`Employee_ID`) ON DELETE CASCADE
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -462,7 +466,7 @@ CREATE TABLE `Region` (
 
 LOCK TABLES `Region` WRITE;
 /*!40000 ALTER TABLE `Region` DISABLE KEYS */;
-INSERT INTO `Region` VALUES ('#A1','Konohagakure','Medllin Cartel','RGM101'),('#A2','Kirigakure','Medllin Cartel','RGM201'),('#A3','Iwagakure','Medllin Cartel','RGM301');
+INSERT INTO `Region` VALUES ('#A1','Konohagakure','Los Pollos Hermanos','RGM101'),('#A2','Kirigakure','Los Pollos Hermanos','RGM201'),('#A3','Iwagakure','Los Pollos Hermanos','RGM301');
 /*!40000 ALTER TABLE `Region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -509,7 +513,7 @@ CREATE TABLE `Sells` (
   KEY `Sells_ibfk_3` (`Supp_Emp_ID`),
   CONSTRAINT `Sells_ibfk_1` FOREIGN KEY (`Producer_ID`) REFERENCES `Producer` (`Producer_ID`) ON DELETE CASCADE,
   CONSTRAINT `Sells_ibfk_2` FOREIGN KEY (`Drug_ID`) REFERENCES `Drug` (`Drug_ID`) ON DELETE CASCADE,
-  CONSTRAINT `Sells_ibfk_3` FOREIGN KEY (`Supp_Emp_ID`) REFERENCES `Employee` (`Employee_ID`) ON DELETE CASCADE
+  CONSTRAINT `Sells_ibfk_3` FOREIGN KEY (`Supp_Emp_ID`) REFERENCES `Supplier` (`Employee_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -594,7 +598,7 @@ CREATE TABLE `Supplies` (
   KEY `Supplies_ibfk_3` (`Supp_Emp_ID`),
   CONSTRAINT `Supplies_ibfk_1` FOREIGN KEY (`Ltnt_Emp_ID`) REFERENCES `Lieutenant` (`Employee_ID`) ON DELETE CASCADE,
   CONSTRAINT `Supplies_ibfk_2` FOREIGN KEY (`Drug_ID`) REFERENCES `Drug` (`Drug_ID`) ON DELETE CASCADE,
-  CONSTRAINT `Supplies_ibfk_3` FOREIGN KEY (`Supp_Emp_ID`) REFERENCES `Employee` (`Employee_ID`) ON DELETE CASCADE
+  CONSTRAINT `Supplies_ibfk_3` FOREIGN KEY (`Supp_Emp_ID`) REFERENCES `Supplier` (`Employee_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
