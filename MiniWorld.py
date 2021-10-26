@@ -131,5 +131,4 @@ while(1):
     except Exception as e:
         tmp = sp.call('clear', shell=True)
         print(e)
-        print("Connection Refused: Either username or password is incorrect or user doesn't have access to database")
         tmp = input("Enter any key to CONTINUE>")
