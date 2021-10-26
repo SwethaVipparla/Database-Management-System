@@ -1,4 +1,5 @@
 import MiniWorld
+import subprocess as sp
 
 def a():
     eid = input("Enter Employee ID you want to delete: ")
@@ -22,7 +23,7 @@ def b():
     return
 
 
-def modify():
+def delete():
     while(1):
         tmp = sp.call('clear', shell=True)
         print("1. Employee")
