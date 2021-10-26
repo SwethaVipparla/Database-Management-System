@@ -1,9 +1,9 @@
 import MiniWorld
+import subprocess as sp
 from datetime import datetime
 
 def a():
     todayDate = datetime.today().strftime('%Y-%m-%d')
-    print(todayDate)
     getDate = input("Enter date from when you want in form yyyy-mm-dd: ")
     query = f"""
 SELECT Region_ID, SUM(Packages) / DATEDIFF('{todayDate}', '{getDate}') as Pac
@@ -24,6 +24,7 @@ ON F.Employee_ID = A.FID
 GROUP BY F.Region_ID;
     """
     MiniWorld.executeQuery(query)
+
 
 def b():
     startDate = input("Enter start date of the week in form yyyy-mm-dd: ")
@@ -52,10 +53,10 @@ GROUP BY Ltnt_Emp_ID;
 def c():
     query = """
 SELECT
-    EXTRACT(YEAR FROM Trans_Date) as Y,
-    EXTRACT(MONTH FROM Trans_Date) as M,
+    Region_ID,
     COUNT(Customer_ID) as Customers,
-    Region_ID
+    EXTRACT(MONTH FROM Trans_Date) as M,
+    EXTRACT(YEAR FROM Trans_Date) as Y
 FROM Buys
 INNER JOIN
 (
@@ -68,3 +69,32 @@ GROUP BY Y, M, Region_ID
 ORDER BY Region_ID, Y, M ASC;
     """
     MiniWorld.executeQuery(query)
+
+
+def analysis():
+    while(1):
+        tmp = sp.call('clear', shell=True)
+        print("1. Average number of packages sold in a region after a particular date")
+        print("2. Profit a lieutenant generates in a week")
+        print("3. Change of number of buyers in a territory over the months")
+        print("")
+        print("4. Back")
+        print("5. Exit")
+
+        ch = input("Enter choice> ").lower()
+        tmp = sp.call('clear', shell=True)
+
+        if ch == '1' or ch == 'average number of packages sold in a region after a particular date':
+            a()
+        elif ch == '2' or ch == 'profit a lieutenant generates in a week':
+            b()
+        elif ch == '3' or ch == 'change of number of buyers in a territory over the months':
+            c()
+        elif ch == '4' or ch == 'back':
+            return
+        elif ch == '5' or ch == 'exit':
+            exit()
+        else:
+            print("Invalid Option")
+
+        input("Enter any key to CONTINUE>")

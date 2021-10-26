@@ -1,4 +1,5 @@
 import MiniWorld
+
 def a():
     cid = input("Enter Customer ID: ")
     amount = float(input("Enter Updated Amount: "))
@@ -30,3 +31,33 @@ def c():
     if MiniWorld.executeQuery(query) == 1:
         print("Updated Database")
     return
+
+
+def update():
+    while(1):
+        tmp = sp.call('clear', shell=True)
+        print("1. Customer Amount")
+        print("2. Producer Amount")
+        print("3. Organisation market value")
+        print("")
+        print("4. Back")
+        print("5. Exit")
+
+        ch = input("Enter choice> ").lower()
+        tmp = sp.call('clear', shell=True)
+
+        if ch == '1' or ch == 'customer amount':
+            a()
+        elif ch == '2' or ch == 'producer amount':
+            b()
+        elif ch == '3' or ch == 'organisation market value':
+            c()
+        elif ch == '4' or ch == 'back':
+            return
+        elif ch == '5' or ch == 'exit':
+            exit()
+        else:
+            print("Invalid Option")
+
+        input("Enter any key to CONTINUE>")
+

@@ -1,7 +1,9 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
-import aggregate, delete, insert, projection, search, selection, update, analysis
+
+import modify
+import retrieve
 
 def display(output):
 
@@ -76,53 +78,16 @@ def executeQuery(query):
         print(">>>>>>>>>>>>>", e)
         return -1
 
+
 def dispatch(ch):
-    if ch == 1:
-        insert.a()
-    elif ch == 2:
-        insert.b()
-    elif ch == 3:
-        insert.c()
-    elif ch == 4:
-        selection.a()
-    elif ch == 5:
-        selection.b()
-    elif ch == 6:
-        projection.a()
-    elif ch == 7:
-        projection.b()
-    elif ch == 8:
-        insert.a()
-    elif ch == 9:
-        insert.b()
-    elif ch == 11:
-        insert.c()
-    elif ch == 12:
-        aggregate.a()
-    elif ch == 13:
-        aggregate.b()
-    elif ch == 14:
-        search.a()
-    elif ch == 15:
-        search.b()
-    elif ch == 16:
-        delete.a()
-    elif ch == 17:
-        delete.b()
-    elif ch == 18:
-        update.a()
-    elif ch == 19:
-        update.b()
-    elif ch == 20:
-        update.c()
-    elif ch == 21:
-        analysis.a()
-    elif ch == 22:
-        analysis.b()
-    elif ch == 23:
-        analysis.c()
+    if ch == '1' or ch == 'modify':
+        modify.modify()
+    elif ch == '2' or ch == 'retrieve':
+        retrieve.retrieve()
+    elif ch == '3' or ch == 'exit':
+        exit()
     else:
-        print("Error: Invalid Option")
+        print("Invalid Option")
 
 # Global
 while(1):
@@ -154,20 +119,14 @@ while(1):
         with con.cursor() as cur:
             while(1):
                 tmp = sp.call('clear', shell=True)
-                # Here taking example of Employee Mini-world
-                print("1. Option 1")  # Hire an Employee
-                print("2. Option 2")  # Fire an Employee
-                print("3. Option 3")  # Promote Employee
-                print("4. Option 4")  # Employee Statistics
+                print("1. Modify")
+                print("2. Retrieve")
                 print("")
-                print("10. Logout")
-                ch = int(input("Enter choice> "))
+                print("3. Exit")
+                ch = input("Enter choice> ").lower()
                 tmp = sp.call('clear', shell=True)
-                if ch == 10:
-                    exit()
-                else:
-                    dispatch(ch)
-                    tmp = input("Enter any key to CONTINUE>")
+                dispatch(ch)
+                tmp = input("Enter any key to CONTINUE>")
 
     except Exception as e:
         tmp = sp.call('clear', shell=True)
