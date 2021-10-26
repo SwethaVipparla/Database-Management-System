@@ -26,7 +26,7 @@ def b():
     accid = input("Enter Accountant ID: ")
     amount = float(input("Enter Amount Laundered: "))
 
-    query = f"INSERT INTO Money_Front VALUES ('{fname}','{oname}','{accid}','amount');"
+    query = f"INSERT INTO Money_Front VALUES ('{fname}','{oname}','{accid}','{amount}');"
 
     if MiniWorld.executeQuery(query) == 1:
         print(f"{colours.bcolors.OKGREEN}Inserted Into Database{colours.bcolors.ENDC}")
@@ -41,7 +41,7 @@ def c():
     oname = input("Enter Organisation Name: ")
     empType = input("Enter Employee Type: ")
     sDate = input("Enter Start Date(YYYY-MM-DD): ")
-    eDate = input("Enter End Date(YYYY-MM-DD): ")
+    eDate = input("Enter End Date(YYYY-MM-DD/NA): ")
     rid = input("Enter Region ID: ")
     fname = input("Enter First Name: ")
     lname = input("Enter Last Name: ")
@@ -73,7 +73,7 @@ def insert():
         print(f"{colours.bcolors.ENDC}")
 
         ch = input("Enter choice: ").lower()
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
 
         if ch == '1' or ch == 'region':
             a()

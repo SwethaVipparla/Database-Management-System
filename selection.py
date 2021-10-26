@@ -17,7 +17,7 @@ def selection():
         tmp = sp.call('clear', shell=True)
         print("Choose an operation:")
         print(f"{colours.bcolors.OKCYAN}")
-        print("1. Drugs with purity > 90")
+        print("1. Drugs with purity > 90%")
         print("2. Accountant Details")
         print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("3. Back")
@@ -27,7 +27,7 @@ def selection():
         ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
-        if ch == '1' or ch == 'drugs with purity > 90':
+        if ch == '1' or ch == 'drugs with purity > 90%':
             a()
         elif ch == '2' or ch == 'accountant details':
             b()

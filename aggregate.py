@@ -28,7 +28,7 @@ def b():
 
 def aggregate():
     while(1):
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
         print("Choose an operation:")
         print(f"{colours.bcolors.OKCYAN}")
         print("1. Total Amount of Packages sold in a day")
@@ -39,7 +39,7 @@ def aggregate():
         print(f"{colours.bcolors.ENDC}")
 
         ch = input("Enter choice: ").lower()
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
 
         if ch == '1' or ch == 'total amount of packages sold in a day':
             a()

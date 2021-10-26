@@ -4,7 +4,19 @@ import subprocess as sp
 
 def a():
     numbers = input("Enter numbers to search for:")
-    query = f'SELECT Phone_Number FROM Producer_Phone_Num WHERE Phone_Number LIKE "%{numbers}%" UNION SELECT Phone_Number FROM Emp_Phone_Num WHERE Phone_Number LIKE "%{numbers}%" UNION SELECT Phone_Number FROM Cust_Phone_Num WHERE Phone_Number LIKE "%{numbers}%";'
+    query = f"""
+    SELECT Phone_Number, Producer_ID as ID 
+        FROM Producer_Phone_Num 
+        WHERE Phone_Number LIKE "%{numbers}%" 
+    UNION 
+        SELECT Phone_Number, Employee_ID as ID 
+        FROM Emp_Phone_Num 
+        WHERE Phone_Number LIKE "%{numbers}%" 
+    UNION 
+        SELECT Phone_Number, Customer_ID as ID 
+        FROM Cust_Phone_Num 
+        WHERE Phone_Number LIKE "%{numbers}%"
+    """
     MiniWorld.executeQuery(query)
 
 

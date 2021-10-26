@@ -37,7 +37,7 @@ def delete():
         print(f"{colours.bcolors.ENDC}")
 
         ch = input("Enter choice: ").lower()
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
 
         if ch == '1' or ch == 'employee':
             a()

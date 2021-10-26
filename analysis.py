@@ -79,7 +79,7 @@ def analysis():
         print(f"{colours.bcolors.OKCYAN}")
         print("1. Average number of packages sold in a region after a particular date")
         print("2. Profit a lieutenant generates in a week")
-        print("3. Change of number of buyers in a territory over the months")
+        print("3. Change in number of buyers in a territory over the months")
         print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("4. Back")
         print("5. Exit")

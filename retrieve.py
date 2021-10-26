@@ -8,7 +8,7 @@ from analysis import analysis
 
 def retrieve():
     while(1):
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
         print("Choose an operation:")
         print(f"{colours.bcolors.OKCYAN}")
         print("1. Selection")

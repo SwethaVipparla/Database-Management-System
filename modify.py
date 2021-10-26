@@ -6,7 +6,7 @@ from update import update
 
 def modify():
     while(1):
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
         print("Choose an operation:")
         print(f"{colours.bcolors.OKCYAN}")
         print("1. Insert")
@@ -18,7 +18,7 @@ def modify():
         print(f"{colours.bcolors.ENDC}")
 
         ch = input("Enter choice: ").lower()
-        tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell = True)
 
         if ch == '1' or ch == 'insert':
             insert()
