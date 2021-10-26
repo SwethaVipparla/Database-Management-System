@@ -1,7 +1,6 @@
 # Los Pollos Hermanos
 
-Los Pollos Hermanos is a drug syndicate, whose ingpin is a very smart and fastidious. He supervises all the operations going on daily in his organization so that he’s always informed of all the happenings in his trade.  
-The organization’s trade is spread across various regions of the country,which inturn consists of multiple territories. There are departments of employees who oversee each of these different operations.
+Los Pollos Hermanos is a drug syndicate, and its kingpin is a very smart and fastidious person. He supervises all the operations going on in his organization daily so that he’s always informed of all the happenings in his trade.  
 
 ## Requirements
 
@@ -9,7 +8,7 @@ The organization’s trade is spread across various regions of the country,which
 
 Install and run MySQL on a [Docker container](https://swamp-season-c38.notion.site/Instructions-to-install-MySQL-in-Docker-12817f073d624673b81b277dece2ffe0).
 
-#### PyMySQL
+### PyMySQL
 
 PyMySQL is an interface for connection to the MySQL server from Python.
 
