@@ -1,4 +1,5 @@
 import MiniWorld
+import colours
 import subprocess as sp
 from datetime import datetime
 
@@ -74,14 +75,17 @@ ORDER BY Region_ID, Y, M ASC;
 def analysis():
     while(1):
         tmp = sp.call('clear', shell=True)
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
         print("1. Average number of packages sold in a region after a particular date")
         print("2. Profit a lieutenant generates in a week")
         print("3. Change of number of buyers in a territory over the months")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("4. Back")
         print("5. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'average number of packages sold in a region after a particular date':
@@ -95,6 +99,6 @@ def analysis():
         elif ch == '5' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")

@@ -1,5 +1,6 @@
 import MiniWorld
 import subprocess as sp
+import colours
 
 def a():
     eid = input("Enter Employee ID you want to delete: ")
@@ -26,13 +27,16 @@ def b():
 def delete():
     while(1):
         tmp = sp.call('clear', shell=True)
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
         print("1. Employee")
         print("2. Money Front")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("3. Back")
         print("4. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'employee':
@@ -44,7 +48,7 @@ def delete():
         elif ch == '4' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")
 

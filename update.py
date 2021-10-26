@@ -1,4 +1,5 @@
 import MiniWorld
+import colours
 import subprocess as sp
 
 def a():
@@ -8,7 +9,8 @@ def a():
     query = f"UPDATE Customer SET Amount_Received = {amount} where Customer_ID = '{cid}'"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Updated Database")
+        print(f"{colours.bcolors.OKGREEN}Updated Database{colours.bcolors.ENDC}")
+        print("")
     return
 
 
@@ -19,7 +21,8 @@ def b():
     query = f"UPDATE Producer SET Total_Amount_Paid = {amount} where Producer_ID = '{pid}'"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Updated Database")
+        print(f"{colours.bcolors.OKGREEN}Updated Database{colours.bcolors.ENDC}")
+        print("")
     return
 
 
@@ -30,21 +33,25 @@ def c():
     query = f"UPDATE Organisation SET Market_Value = {value} where Organisation_Name = '{name}'"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Updated Database")
+        print(f"{colours.bcolors.OKGREEN}Updated Database{colours.bcolors.ENDC}")
+        print("")
     return
 
 
 def update():
     while(1):
         tmp = sp.call('clear', shell=True)
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
         print("1. Customer Amount")
         print("2. Producer Amount")
         print("3. Organisation market value")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("4. Back")
         print("5. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'customer amount':
@@ -58,7 +65,7 @@ def update():
         elif ch == '5' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")
 

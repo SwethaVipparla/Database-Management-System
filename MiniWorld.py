@@ -2,6 +2,7 @@ import subprocess as sp
 import pymysql
 import pymysql.cursors
 import utils
+import colours
 
 import modify
 import retrieve
@@ -120,16 +121,17 @@ while(1):
         with con.cursor() as cur:
             while(1):
                 tmp = sp.call('clear', shell=True)
+                print("What would you like to do today?")
+                print(f"{colours.bcolors.OKCYAN}")
                 print("1. Modify")
                 print("2. Retrieve")
-                print("")
+                print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
                 print("3. Exit")
-                ch = input("Enter choice> ").lower()
+                print(f"{colours.bcolors.ENDC}")
+                ch = input("Enter choice: ").lower()
                 tmp = sp.call('clear', shell=True)
                 dispatch(ch)
-                tmp = input("Enter any key to CONTINUE>")
 
     except Exception as e:
         tmp = sp.call('clear', shell=True)
         print(e)
-        tmp = input("Enter any key to CONTINUE>")

@@ -1,4 +1,5 @@
 import MiniWorld
+import colours
 import subprocess as sp
 
 def a():
@@ -28,13 +29,16 @@ def b():
 def aggregate():
     while(1):
         tmp = sp.call('clear', shell=True)
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
         print("1. Total Amount of Packages sold in a day")
         print("2. Net profit acquired by end of the year")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("3. Back")
         print("4. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'total amount of packages sold in a day':
@@ -46,6 +50,6 @@ def aggregate():
         elif ch == '4' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")

@@ -1,5 +1,6 @@
 import MiniWorld
 import subprocess as sp
+import colours
 
 def a():
 
@@ -12,7 +13,8 @@ def a():
     query = f"INSERT INTO Region VALUES ('{id}','{rname}','{oname}','{mgrid}');"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Inserted Into Database")
+        print(f"{colours.bcolors.OKGREEN}Inserted Into Database{colours.bcolors.ENDC}")
+        print("")
     return
 
 
@@ -27,7 +29,8 @@ def b():
     query = f"INSERT INTO Money_Front VALUES ('{fname}','{oname}','{accid}','amount');"
 
     if MiniWorld.executeQuery(query) == 1:
-         print("Inserted Into Database")
+        print(f"{colours.bcolors.OKGREEN}Inserted Into Database{colours.bcolors.ENDC}")
+        print("")
     return
 
 
@@ -51,21 +54,25 @@ def c():
     query = f"INSERT INTO Employee VALUES ('{eid}','{oname}','{empType}','{sDate}','{eDate}','{rid}', '{fname}','{lname}','{dob}','{sal}');"
 
     if MiniWorld.executeQuery(query) == 1:
-        print("Inserted Into Database")
+        print(f"{colours.bcolors.OKGREEN}Inserted Into Database{colours.bcolors.ENDC}")
+        print("")
     return
 
 
 def insert():
     while(1):
         tmp = sp.call('clear', shell=True)
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
         print("1. Region")
         print("2. Money Front")
         print("3. Employee")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("4. Back")
         print("5. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'region':
@@ -79,6 +86,6 @@ def insert():
         elif ch == '5' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")

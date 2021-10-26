@@ -1,8 +1,9 @@
 import MiniWorld
 import subprocess as sp
+import colours
 
 def a():
-    query = 'SELECT Employee.First_Name, Employee.Last_Name FROM Employee INNER JOIN Money_Front ON Employee.Employee_ID = Money_Front.Acc_Emp_ID WHERE Money_Front.Amount_Laundered >= 4800;'
+    query = 'SELECT CONCAT(Employee.First_Name," ", Employee.Last_Name) AS Name FROM Employee INNER JOIN Money_Front ON Employee.Employee_ID = Money_Front.Acc_Emp_ID WHERE Money_Front.Amount_Laundered >= 4800;'
     MiniWorld.executeQuery(query)
 
 
@@ -14,13 +15,16 @@ def b():
 def projection():
     while(1):
         tmp = sp.call('clear', shell=True)
-        print("1. a")
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
+        print("1. List all managers of who laundered amount greater than 4800")
         print("2. Number of Employees in a Territory")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("3. Back")
         print("4. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'a':
@@ -32,6 +36,6 @@ def projection():
         elif ch == '4' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")

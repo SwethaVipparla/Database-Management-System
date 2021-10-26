@@ -1,4 +1,5 @@
 import subprocess as sp
+import colours
 from selection import selection
 from projection import projection
 from aggregate import aggregate
@@ -8,16 +9,19 @@ from analysis import analysis
 def retrieve():
     while(1):
         tmp = sp.call('clear', shell=True)
+        print("Choose an operation:")
+        print(f"{colours.bcolors.OKCYAN}")
         print("1. Selection")
         print("2. Projection")
         print("3. Aggregate")
         print("4. Search")
         print("5. Analysis")
-        print("")
+        print(f"{colours.bcolors.ENDC}{colours.bcolors.WARNING}")
         print("6. Back")
         print("7. Exit")
+        print(f"{colours.bcolors.ENDC}")
 
-        ch = input("Enter choice> ").lower()
+        ch = input("Enter choice: ").lower()
         tmp = sp.call('clear', shell=True)
 
         if ch == '1' or ch == 'selection':
@@ -35,6 +39,6 @@ def retrieve():
         elif ch == '7' or ch == 'exit':
             exit()
         else:
-            print("Invalid Option")
+            print(f"{colours.bcolors.RED}Invalid Option{colours.bcolors.ENDC}")
 
-        input("Enter any key to CONTINUE>")
+        input("Enter any key to continue: ")
