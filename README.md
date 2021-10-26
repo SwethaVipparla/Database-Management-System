@@ -95,7 +95,7 @@ Los Pollos Hermanos supports the following functional requirements:
     (
         '<Employee_ID>',
         '<Organisation_Name>',
-        '<Employee_Type}',
+        '<Employee_Type>',
         '<Start_Date>',
         '<End_Date>',
         '<Region_ID>',
@@ -134,7 +134,7 @@ Los Pollos Hermanos supports the following functional requirements:
 
     ```sql
     UPDATE Customer 
-    SET Amount_Received = <New_Amount> 
+    SET Amount_Received = '<New_Amount>' 
     WHERE Customer_ID = '<Customer_ID>'
     ```
 
@@ -143,7 +143,7 @@ Los Pollos Hermanos supports the following functional requirements:
 
     ```sql
     UPDATE Producer 
-    SET Total_Amount_Paid = <New_Amount> 
+    SET Total_Amount_Paid = '<New_Amount>' 
     WHERE Producer_ID = '<Producer_ID>'
     ```
 
@@ -152,7 +152,7 @@ Los Pollos Hermanos supports the following functional requirements:
 
     ```sql
     UPDATE Organisation
-    SET Market_Value = <New_Value>
+    SET Market_Value = '<New_Value>'
     WHERE Organisation_Name = '<Organisation_Name>'
     ```
 
@@ -327,7 +327,7 @@ Los Pollos Hermanos supports the following functional requirements:
         FROM Employee
         WHERE Employee_Type = 'Falcon'
     ) as F
-    ON Falc_Emp_ID  = Employee_ID
+    ON Falc_Emp_ID = Employee_ID
     GROUP BY Y, M, Region_ID
     ORDER BY Region_ID, Y, M ASC;
     ```
