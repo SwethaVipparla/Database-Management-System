@@ -2,6 +2,8 @@
 
 Los Pollos Hermanos is a drug syndicate, and its kingpin is a very smart and fastidious person. He supervises all the operations going on in his organization daily so that he’s always informed of all the happenings in his trade.  
 
+This database serves the purpose of storing all the information about the syndicate and provides fuctionalities for the users of the database to perform actions on the former and write various queries to get the desired outputs.  
+
 ## Requirements
 
 ### MySQL
